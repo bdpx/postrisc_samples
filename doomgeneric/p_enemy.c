@@ -38,7 +38,7 @@
 // Data.
 #include "sounds.h"
 
-
+#include "info.h"
 
 
 typedef enum

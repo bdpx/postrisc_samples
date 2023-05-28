@@ -153,7 +153,7 @@ typedef struct menu_s
     short		numitems;	// # of menu items
     struct menu_s*	prevMenu;	// previous menu
     menuitem_t*		menuitems;	// menu items
-    void		(*routine)();	// draw routine
+    void		(*routine)(void);	// draw routine
     short		x;
     short		y;		// x,y of menu
     short		lastOn;		// last item user was on in menu
@@ -218,7 +218,7 @@ void M_DrawSelCell(menu_t *menu,int item);
 void M_WriteText(int x, int y, char *string);
 int  M_StringWidth(char *string);
 int  M_StringHeight(char *string);
-void M_StartMessage(char *string,void *routine,boolean input);
+void M_StartMessage(char *string, void (*routine)(int key), boolean input);
 void M_StopMessage(void);
 void M_ClearMenus (void);
 
@@ -1288,7 +1288,7 @@ M_DrawSelCell
 void
 M_StartMessage
 ( char*		string,
-  void*		routine,
+  void (*routine)(int key),
   boolean	input )
 {
     messageLastMenuActive = menuactive;

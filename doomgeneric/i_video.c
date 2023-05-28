@@ -131,7 +131,7 @@ typedef struct
 
 static uint16_t rgb565_palette[256];
 
-void cmap_to_rgb565(uint16_t * out, uint8_t * in, int in_pixels)
+static void cmap_to_rgb565(uint16_t * out, uint8_t * in, int in_pixels)
 {
     int i, j;
     struct color c;
@@ -152,7 +152,7 @@ void cmap_to_rgb565(uint16_t * out, uint8_t * in, int in_pixels)
     }
 }
 
-void cmap_to_fb(uint8_t * out, uint8_t * in, int in_pixels)
+static void cmap_to_fb(uint8_t * out, uint8_t * in, int in_pixels)
 {
     int i, j, k;
     struct color c;

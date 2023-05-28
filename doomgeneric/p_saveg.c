@@ -314,10 +314,10 @@ static void saveg_read_mobj_t(mobj_t *str)
     // fixed_t z;
     str->z = saveg_read32();
 
-    // struct mobj_s* snext;
+    // struct mobj_t* snext;
     str->snext = saveg_readp();
 
-    // struct mobj_s* sprev;
+    // struct mobj_t* sprev;
     str->sprev = saveg_readp();
 
     // angle_t angle;
@@ -329,10 +329,10 @@ static void saveg_read_mobj_t(mobj_t *str)
     // int frame;
     str->frame = saveg_read32();
 
-    // struct mobj_s* bnext;
+    // struct mobj_t* bnext;
     str->bnext = saveg_readp();
 
-    // struct mobj_s* bprev;
+    // struct mobj_t* bprev;
     str->bprev = saveg_readp();
 
     // struct subsector_s* subsector;
@@ -386,7 +386,7 @@ static void saveg_read_mobj_t(mobj_t *str)
     // int movecount;
     str->movecount = saveg_read32();
 
-    // struct mobj_s* target;
+    // struct mobj_t* target;
     str->target = saveg_readp();
 
     // int reactiontime;
@@ -414,7 +414,7 @@ static void saveg_read_mobj_t(mobj_t *str)
     // mapthing_t spawnpoint;
     saveg_read_mapthing_t(&str->spawnpoint);
 
-    // struct mobj_s* tracer;
+    // struct mobj_t* tracer;
     str->tracer = saveg_readp();
 }
 
@@ -432,10 +432,10 @@ static void saveg_write_mobj_t(mobj_t *str)
     // fixed_t z;
     saveg_write32(str->z);
 
-    // struct mobj_s* snext;
+    // struct mobj_t* snext;
     saveg_writep(str->snext);
 
-    // struct mobj_s* sprev;
+    // struct mobj_t* sprev;
     saveg_writep(str->sprev);
 
     // angle_t angle;
@@ -447,10 +447,10 @@ static void saveg_write_mobj_t(mobj_t *str)
     // int frame;
     saveg_write32(str->frame);
 
-    // struct mobj_s* bnext;
+    // struct mobj_t* bnext;
     saveg_writep(str->bnext);
 
-    // struct mobj_s* bprev;
+    // struct mobj_t* bprev;
     saveg_writep(str->bprev);
 
     // struct subsector_s* subsector;
@@ -504,7 +504,7 @@ static void saveg_write_mobj_t(mobj_t *str)
     // int movecount;
     saveg_write32(str->movecount);
 
-    // struct mobj_s* target;
+    // struct mobj_t* target;
     saveg_writep(str->target);
 
     // int reactiontime;
@@ -529,7 +529,7 @@ static void saveg_write_mobj_t(mobj_t *str)
     // mapthing_t spawnpoint;
     saveg_write_mapthing_t(&str->spawnpoint);
 
-    // struct mobj_s* tracer;
+    // struct mobj_t* tracer;
     saveg_writep(str->tracer);
 }
 

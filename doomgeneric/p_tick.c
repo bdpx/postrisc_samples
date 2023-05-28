@@ -108,7 +108,7 @@ void P_RunThinkers (void)
 	else
 	{
 	    if (currentthinker->function.acp1)
-		currentthinker->function.acp1 (currentthinker);
+		currentthinker->function.acp1 ((mobj_t*)currentthinker);
 	}
 	currentthinker = currentthinker->next;
     }

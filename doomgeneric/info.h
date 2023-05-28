@@ -1328,4 +1328,85 @@ typedef struct
 
 extern mobjinfo_t mobjinfo[NUMMOBJTYPES];
 
+#include "p_mobj.h"
+#include "p_pspr.h"
+#include "d_player.h"
+
+// Doesn't work with g++, needs actionf_p1
+void A_Light0(player_t *player, pspdef_t *psp);
+void A_WeaponReady(player_t *player, pspdef_t *psp);
+void A_Lower(player_t *player, pspdef_t *psp);
+void A_Raise(player_t *player, pspdef_t *psp);
+void A_Punch(player_t *player, pspdef_t *psp);
+void A_ReFire(player_t *player, pspdef_t *psp);
+void A_FirePistol(player_t *player, pspdef_t *psp);
+void A_Light1(player_t *player, pspdef_t *psp);
+void A_FireShotgun(player_t *player, pspdef_t *psp);
+void A_Light2(player_t *player, pspdef_t *psp);
+void A_FireShotgun2(player_t *player, pspdef_t *psp);
+void A_CheckReload(player_t *player, pspdef_t *psp);
+void A_OpenShotgun2(player_t *player, pspdef_t *psp);
+void A_LoadShotgun2(player_t *player, pspdef_t *psp);
+void A_CloseShotgun2(player_t *player, pspdef_t *psp);
+void A_FireCGun(player_t *player, pspdef_t *psp);
+void A_GunFlash(player_t *player, pspdef_t *psp);
+void A_FireMissile(player_t *player, pspdef_t *psp);
+void A_Saw(player_t *player, pspdef_t *psp);
+void A_FirePlasma(player_t *player, pspdef_t *psp);
+void A_BFGsound(player_t *player, pspdef_t *psp);
+void A_FireBFG(player_t *player, pspdef_t *psp);
+
+void A_BFGSpray(mobj_t *actor);
+void A_Explode(mobj_t *actor);
+void A_Pain(mobj_t *actor);
+void A_PlayerScream(mobj_t *actor);
+void A_Fall(mobj_t *actor);
+void A_XScream(mobj_t *actor);
+void A_Look(mobj_t *actor);
+void A_Chase(mobj_t *actor);
+void A_FaceTarget(mobj_t* actor);
+void A_PosAttack(mobj_t *actor);
+void A_Scream(mobj_t *actor);
+void A_SPosAttack(mobj_t *actor);
+void A_VileChase(mobj_t *actor);
+void A_VileStart(mobj_t *actor);
+void A_VileTarget(mobj_t *actor);
+void A_VileAttack(mobj_t *actor);
+void A_StartFire(mobj_t *actor);
+void A_Fire(mobj_t *actor);
+void A_FireCrackle(mobj_t *actor);
+void A_Tracer(mobj_t *actor);
+void A_SkelWhoosh(mobj_t *actor);
+void A_SkelFist(mobj_t *actor);
+void A_SkelMissile(mobj_t *actor);
+void A_FatRaise(mobj_t *actor);
+void A_FatAttack1(mobj_t *actor);
+void A_FatAttack2(mobj_t *actor);
+void A_FatAttack3(mobj_t *actor);
+void A_BossDeath(mobj_t *actor);
+void A_CPosAttack(mobj_t *actor);
+void A_CPosRefire(mobj_t *actor);
+void A_TroopAttack(mobj_t *actor);
+void A_SargAttack(mobj_t *actor);
+void A_HeadAttack(mobj_t *actor);
+void A_BruisAttack(mobj_t *actor);
+void A_SkullAttack(mobj_t *actor);
+void A_Metal(mobj_t *actor);
+void A_SpidRefire(mobj_t *actor);
+void A_BabyMetal(mobj_t *actor);
+void A_BspiAttack(mobj_t *actor);
+void A_Hoof(mobj_t *actor);
+void A_CyberAttack(mobj_t *actor);
+void A_PainAttack(mobj_t *actor);
+void A_PainDie(mobj_t *actor);
+void A_KeenDie(mobj_t* mo);
+void A_BrainPain(mobj_t *actor);
+void A_BrainScream(mobj_t *actor);
+void A_BrainDie(mobj_t *actor);
+void A_BrainAwake(mobj_t *actor);
+void A_BrainSpit(mobj_t *actor);
+void A_SpawnSound(mobj_t *actor);
+void A_SpawnFly(mobj_t *actor);
+void A_BrainExplode(mobj_t *actor);
+
 #endif

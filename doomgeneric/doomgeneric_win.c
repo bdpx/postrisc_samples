@@ -4,9 +4,9 @@
 
 #include <stdio.h>
 
-#include <Windows.h>
+#include <windows.h>
 
-static BITMAPINFO s_Bmi = { sizeof(BITMAPINFOHEADER), DOOMGENERIC_RESX, -DOOMGENERIC_RESY, 1, 32 };
+static BITMAPINFO s_Bmi = {{ sizeof(BITMAPINFOHEADER), DOOMGENERIC_RESX, -DOOMGENERIC_RESY, 1, 32 }};
 static HWND s_Hwnd = 0;
 static HDC s_Hdc = 0;
 
@@ -90,7 +90,7 @@ static LRESULT CALLBACK wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 	return 0;
 }
 
-void DG_Init()
+void DG_Init(void)
 {
 	// window creation
 	const char windowClassName[] = "DoomWindowClass";
@@ -141,7 +141,7 @@ void DG_Init()
 	memset(s_KeyQueue, 0, KEYQUEUE_SIZE * sizeof(unsigned short));
 }
 
-void DG_DrawFrame()
+void DG_DrawFrame(void)
 {
 	MSG msg;
 	memset(&msg, 0, sizeof(msg));
@@ -162,7 +162,7 @@ void DG_SleepMs(uint32_t ms)
 	Sleep(ms);
 }
 
-uint32_t DG_GetTicksMs()
+uint32_t DG_GetTicksMs(void)
 {
 	return GetTickCount();
 }

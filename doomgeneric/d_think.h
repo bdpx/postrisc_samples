@@ -32,9 +32,13 @@
 //  we will need to handle the various
 //  action functions cleanly.
 //
-typedef  void (*actionf_v)();
-typedef  void (*actionf_p1)( void* );
-typedef  void (*actionf_p2)( void*, void* );
+typedef struct player_t player_t;
+typedef struct pspdef_t pspdef_t;
+typedef struct mobj_t mobj_t;
+
+typedef  void (*actionf_v)( void );
+typedef  void (*actionf_p1)(struct mobj_t*);
+typedef  void (*actionf_p2)(struct player_t *player, struct pspdef_t *psp );
 
 typedef union
 {

@@ -131,7 +131,7 @@ static void handleKeyInput(){
 }
 
 
-void DG_Init(){
+void DG_Init(void){
   window = SDL_CreateWindow("DOOM",
                             SDL_WINDOWPOS_UNDEFINED,
                             SDL_WINDOWPOS_UNDEFINED,
@@ -150,7 +150,7 @@ void DG_Init(){
   texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, DOOMGENERIC_RESX, DOOMGENERIC_RESY);
 }
 
-void DG_DrawFrame()
+void DG_DrawFrame(void)
 {
   SDL_UpdateTexture(texture, NULL, DG_ScreenBuffer, DOOMGENERIC_RESX*sizeof(uint32_t));
 
@@ -166,7 +166,7 @@ void DG_SleepMs(uint32_t ms)
   SDL_Delay(ms);
 }
 
-uint32_t DG_GetTicksMs()
+uint32_t DG_GetTicksMs(void)
 {
   return SDL_GetTicks();
 }

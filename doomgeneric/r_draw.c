@@ -129,6 +129,10 @@ void R_DrawColumn (void)
     fracstep = dc_iscale; 
     frac = dc_texturemid + (dc_yl-centery)*fracstep; 
 
+    // next loop is 40% runtime, optimize out globals loading
+    lighttable_t *local_dc_colormap = dc_colormap;
+    byte *local_dc_source = dc_source;
+
     // Inner loop that does the actual texture mapping,
     //  e.g. a DDA-lile scaling.
     // This is as fast as it gets.
@@ -136,7 +140,7 @@ void R_DrawColumn (void)
     {
 	// Re-map color indices from wall texture column
 	//  using a lighting/special effects LUT.
-	*dest = dc_colormap[dc_source[(frac>>FRACBITS)&127]];
+	*dest = local_dc_colormap[local_dc_source[(frac>>FRACBITS)&127]];
 	
 	dest += SCREENWIDTH; 
 	frac += fracstep;
@@ -258,7 +262,7 @@ void R_DrawColumnLow (void)
 #define FUZZOFF	(SCREENWIDTH)
 
 
-int	fuzzoffset[FUZZTABLE] =
+static const int fuzzoffset[FUZZTABLE] =
 {
     FUZZOFF,-FUZZOFF,FUZZOFF,-FUZZOFF,FUZZOFF,FUZZOFF,-FUZZOFF,
     FUZZOFF,FUZZOFF,-FUZZOFF,FUZZOFF,FUZZOFF,FUZZOFF,-FUZZOFF,
@@ -316,6 +320,9 @@ void R_DrawFuzzColumn (void)
     fracstep = dc_iscale; 
     frac = dc_texturemid + (dc_yl-centery)*fracstep; 
 
+    // next loop is 1.5% runtime, optimize out globals loading
+    lighttable_t *local_colormaps = colormaps;
+    int local_fuzzpos = fuzzpos;
     // Looks like an attempt at dithering,
     //  using the colormap #6 (of 0-31, a bit
     //  brighter than average).
@@ -325,16 +332,18 @@ void R_DrawFuzzColumn (void)
 	//  a pixel that is either one column
 	//  left or right of the current one.
 	// Add index from colormap to index.
-	*dest = colormaps[6*256+dest[fuzzoffset[fuzzpos]]]; 
+	*dest = local_colormaps[6*256+dest[fuzzoffset[local_fuzzpos]]];
 
 	// Clamp table lookup index.
-	if (++fuzzpos == FUZZTABLE) 
-	    fuzzpos = 0;
+	if (++local_fuzzpos == FUZZTABLE)
+	    local_fuzzpos = 0;
 	
 	dest += SCREENWIDTH;
 
 	frac += fracstep; 
     } while (count--); 
+
+    fuzzpos = local_fuzzpos;
 } 
 
 // low detail mode version
@@ -622,6 +631,10 @@ void R_DrawSpan (void)
     // We do not check for zero spans here?
     count = ds_x2 - ds_x1;
 
+    // next loop is 20% runtime, optimize out globals loading
+    lighttable_t *local_ds_colormap = ds_colormap;
+    byte *local_ds_source = ds_source;
+
     do
     {
 	// Calculate current texture index in u,v.
@@ -631,7 +644,7 @@ void R_DrawSpan (void)
 
 	// Lookup pixel from flat texture tile,
 	//  re-index using light/colormap.
-	*dest++ = ds_colormap[ds_source[spot]];
+	*dest++ = local_ds_colormap[local_ds_source[spot]];
 
         position += step;
 

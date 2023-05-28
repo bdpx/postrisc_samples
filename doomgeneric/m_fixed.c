@@ -30,6 +30,7 @@
 
 // Fixme. __USE_C_FIXED__ or something.
 
+#if !defined(__POSTRISC__)
 fixed_t
 FixedMul
 ( fixed_t	a,
@@ -37,6 +38,7 @@ FixedMul
 {
     return ((int64_t) a * (int64_t) b) >> FRACBITS;
 }
+#endif
 
 
 

@@ -31,7 +31,15 @@
 
 typedef int fixed_t;
 
+#if defined(__POSTRISC__)
+#include "doomtype.h"
+
+inline fixed_t FixedMul (fixed_t a, fixed_t b) {
+    return ((int64_t) a * (int64_t) b) >> FRACBITS;
+}
+#else
 fixed_t FixedMul	(fixed_t a, fixed_t b);
+#endif
 fixed_t FixedDiv	(fixed_t a, fixed_t b);
 
 

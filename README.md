@@ -65,3 +65,8 @@ emscripten port is based on SDL port, so it supports sound and music! For music,
 
 ## SDL
 ![SDL](screenshots/sdl.png)
+
+## Postrisc emulator (Qt)
+![Postrisc](screenshots/postrisc.png)
+
+Postrisc port is playable, but some visual artifacts still present.

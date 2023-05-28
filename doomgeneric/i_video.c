@@ -265,6 +265,9 @@ void I_UpdateNoBlit (void)
 
 void I_FinishUpdate (void)
 {
+#if defined(__POSTRISC__)
+    // Postrisc doen't scale image in guest, it is up to emulator
+#else
     int y;
     int x_offset, y_offset, x_offset_end;
     unsigned char *line_in, *line_out;
@@ -310,6 +313,7 @@ void I_FinishUpdate (void)
         }
         line_in += SCREENWIDTH;
     }
+#endif // !defined(__POSTRISC__)
 
 	DG_DrawFrame();
 }

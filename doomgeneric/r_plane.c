@@ -320,7 +320,7 @@ R_CheckPlane
 //
 // R_MakeSpans
 //
-void
+static inline void
 R_MakeSpans
 ( int		x,
   int		t1,

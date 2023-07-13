@@ -788,11 +788,11 @@ void WritePNGfile(char *filename, byte *data,
 // V_ScreenShot
 //
 
-void V_ScreenShot(char *format)
+void V_ScreenShot(char const *format)
 {
     int i;
     char lbmname[16]; // haleyjd 20110213: BUG FIX - 12 is too small!
-    char *ext;
+    char const *ext;
     
     // find a file name to save it to
 

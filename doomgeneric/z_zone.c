@@ -426,7 +426,7 @@ void Z_CheckHeap (void)
 //
 // Z_ChangeTag
 //
-void Z_ChangeTag2(void *ptr, int tag, char *file, int line)
+void Z_ChangeTag2(void *ptr, int tag, char const *file, int line)
 {
     memblock_t*	block;
 	

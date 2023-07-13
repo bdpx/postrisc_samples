@@ -72,7 +72,7 @@ struct sfxinfo_struct
 typedef struct
 {
     // up to 6-character name
-    char *name;
+    char const *name;
 
     // lump number of music
     int lumpnum;
@@ -230,7 +230,7 @@ extern int snd_musicdevice;
 extern int snd_samplerate;
 extern int snd_cachesize;
 extern int snd_maxslicetime_ms;
-extern char *snd_musiccmd;
+extern char const *snd_musiccmd;
 
 void I_BindSoundVariables(void);
 

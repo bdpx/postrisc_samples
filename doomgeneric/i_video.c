@@ -410,7 +410,7 @@ void I_EndRead (void)
 {
 }
 
-void I_SetWindowTitle (char *title)
+void I_SetWindowTitle (char const *title)
 {
 	DG_SetWindowTitle(title);
 }

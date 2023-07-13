@@ -307,7 +307,7 @@ void D_StartGameLoop(void)
     lasttime = GetAdjustedTime() / ticdup;
 }
 
-#if ORIGCODE
+#ifdef ORIGCODE
 //
 // Block until the game start message is received from the server.
 //
@@ -340,7 +340,7 @@ static void BlockUntilStart(net_gamesettings_t *settings,
 void D_StartNetGame(net_gamesettings_t *settings,
                     netgame_startup_callback_t callback)
 {
-#if ORIGCODE
+#ifdef ORIGCODE
     int i;
 
     offsetms = 0;
@@ -672,7 +672,7 @@ static boolean PlayersInGame(void)
 static void TicdupSquash(ticcmd_set_t *set)
 {
     ticcmd_t *cmd;
-    unsigned int i;
+    int i;
 
     for (i = 0; i < NET_MAXPLAYERS ; ++i)
     {
@@ -688,7 +688,7 @@ static void TicdupSquash(ticcmd_set_t *set)
 
 static void SinglePlayerClear(ticcmd_set_t *set)
 {
-    unsigned int i;
+    int i;
 
     for (i = 0; i < NET_MAXPLAYERS; ++i)
     {

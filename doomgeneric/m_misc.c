@@ -52,7 +52,7 @@
 // Create a directory
 //
 
-void M_MakeDirectory(char *path)
+void M_MakeDirectory(char const *path)
 {
 #ifdef _WIN32
     mkdir(path);
@@ -63,7 +63,7 @@ void M_MakeDirectory(char *path)
 
 // Check if a file exists
 
-boolean M_FileExists(char *filename)
+boolean M_FileExists(char const *filename)
 {
     FILE *fstream;
 
@@ -164,9 +164,9 @@ int M_ReadFile(char *name, byte **buffer)
 //
 // The returned value must be freed with Z_Free after use.
 
-char *M_TempFile(char *s)
+char *M_TempFile(char const *s)
 {
-    char *tempdir;
+    char const *tempdir;
 
 #if defined(_WIN32) || defined(__DJGPP__)
 
@@ -195,10 +195,10 @@ boolean M_StrToInt(const char *str, int *result)
         || sscanf(str, " %d", result) == 1;
 }
 
-void M_ExtractFileBase(char *path, char *dest)
+void M_ExtractFileBase(char const *path, char *dest)
 {
-    char *src;
-    char *filename;
+    char const *src;
+    char const *filename;
     int length;
 
     src = path + strlen(path) - 1;

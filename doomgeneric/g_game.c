@@ -281,7 +281,7 @@ static boolean WeaponSelectable(weapontype_t weapon)
 static int G_NextWeapon(int direction)
 {
     weapontype_t weapon;
-    int start_i, i;
+    size_t start_i, i;
 
     // Find index in the table.
 
@@ -321,7 +321,6 @@ static int G_NextWeapon(int direction)
 // 
 void G_BuildTiccmd (ticcmd_t* cmd, int maketic) 
 { 
-    int		i; 
     boolean	strafe;
     boolean	bstrafe; 
     int		speed;
@@ -447,7 +446,7 @@ void G_BuildTiccmd (ticcmd_t* cmd, int maketic)
 
     if (gamestate == GS_LEVEL && next_weapon != 0)
     {
-        i = G_NextWeapon(next_weapon);
+        int i = G_NextWeapon(next_weapon);
         cmd->buttons |= BT_CHANGE;
         cmd->buttons |= i << BT_WEAPONSHIFT;
     }
@@ -455,7 +454,7 @@ void G_BuildTiccmd (ticcmd_t* cmd, int maketic)
     {
         // Check weapon keys.
 
-        for (i=0; i<arrlen(weapon_keys); ++i)
+        for (size_t i=0; i<arrlen(weapon_keys); ++i)
         {
             int key = *weapon_keys[i];
 
@@ -617,7 +616,7 @@ void G_DoLoadLevel (void)
     if ((gamemode == commercial)
      && (gameversion == exe_final2 || gameversion == exe_chex))
     {
-        char *skytexturename;
+        char const *skytexturename;
 
         if (gamemap < 12)
         {
@@ -1729,7 +1728,7 @@ G_InitNew
   int		episode,
   int		map )
 {
-    char *skytexturename;
+    char const *skytexturename;
     int             i;
 
     if (paused)
@@ -2102,9 +2101,9 @@ void G_BeginRecording (void)
 // G_PlayDemo 
 //
 
-char*	defdemoname; 
+char const *defdemoname;
  
-void G_DeferedPlayDemo (char* name) 
+void G_DeferedPlayDemo (char const *name)
 { 
     defdemoname = name; 
     gameaction = ga_playdemo; 
@@ -2112,7 +2111,7 @@ void G_DeferedPlayDemo (char* name)
 
 // Generate a string describing a demo version
 
-static char *DemoVersionDescription(int version)
+static char const *DemoVersionDescription(int version)
 {
     static char resultbuf[16];
 
@@ -2171,7 +2170,7 @@ void G_DoPlayDemo (void)
     }
     else
     {
-        char *message = "Demo is from a different game version!\n"
+        char const message[] = "Demo is from a different game version!\n"
                         "(read %i, should be %i)\n"
                         "\n"
                         "*** You may need to upgrade your version "

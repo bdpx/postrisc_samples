@@ -50,10 +50,10 @@ static wad_file_class_t *wad_file_classes[] =
     &stdc_wad_file,
 };
 
-wad_file_t *W_OpenFile(char *path)
+wad_file_t *W_OpenFile(char const *path)
 {
     wad_file_t *result;
-    int i;
+    size_t i;
 
     //!
     // Use the OS's virtual memory subsystem to map WAD files

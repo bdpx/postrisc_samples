@@ -87,11 +87,11 @@ void D_DoomLoop (void);
 
 // Location where savegames are stored
 
-char *          savegamedir;
+char const *    savegamedir;
 
 // location of IWAD and WAD files
 
-char *          iwadfile;
+char const *    iwadfile;
 
 
 boolean		devparm;	// started game with -devparm
@@ -465,7 +465,7 @@ void D_DoomLoop (void)
 //
 int             demosequence;
 int             pagetic;
-char                    *pagename;
+char const      *pagename;
 
 
 //
@@ -603,7 +603,7 @@ void D_StartTitle (void)
 // These are from the original source: some of them are perhaps
 // not used in any dehacked patches
 
-static char *banners[] =
+static char const *banners[] =
 {
     // doom2.wad
     "                         "
@@ -640,10 +640,10 @@ static char *banners[] =
 // Otherwise, use the name given
 // 
 
-static char *GetGameName(char *gamename)
+static char const *GetGameName(char const *gamename)
 {
     size_t i;
-    char *deh_sub;
+    char const *deh_sub;
     
     for (i=0; i<arrlen(banners); ++i)
     {
@@ -661,22 +661,22 @@ static char *GetGameName(char *gamename)
             // We also need to cut off spaces to get the basic name
 
             gamename_size = strlen(deh_sub) + 10;
-            gamename = Z_Malloc(gamename_size, PU_STATIC, 0);
+            char *gamename_new = Z_Malloc(gamename_size, PU_STATIC, 0);
             version = G_VanillaVersionCode();
-            M_snprintf(gamename, gamename_size, deh_sub,
+            M_snprintf(gamename_new, gamename_size, deh_sub,
                        version / 100, version % 100);
 
-            while (gamename[0] != '\0' && isspace((int)gamename[0]))
+            while (gamename_new[0] != '\0' && isspace((int)gamename_new[0]))
             {
-                memmove(gamename, gamename + 1, gamename_size - 1);
+                memmove(gamename_new, gamename_new + 1, gamename_size - 1);
             }
 
-            while (gamename[0] != '\0' && isspace((int)gamename[strlen(gamename)-1]))
+            while (gamename_new[0] != '\0' && isspace((int)gamename_new[strlen(gamename_new)-1]))
             {
-                gamename[strlen(gamename) - 1] = '\0';
+                gamename_new[strlen(gamename_new) - 1] = '\0';
             }
 
-            return gamename;
+            return gamename_new;
         }
     }
 
@@ -685,10 +685,10 @@ static char *GetGameName(char *gamename)
 
 static void SetMissionForPackName(char *pack_name)
 {
-    int i;
+    size_t i;
     static const struct
     {
-        char *name;
+        char name[16];
         int mission;
     } packs[] = {
         { "doom2",    doom2 },
@@ -865,7 +865,7 @@ void D_SetGameDescription(void)
 //      print title for every printed line
 char            title[128];
 
-static boolean D_AddFile(char *filename)
+static boolean D_AddFile(char const *filename)
 {
     wad_file_t *handle;
 
@@ -879,7 +879,7 @@ static boolean D_AddFile(char *filename)
 // Some dehacked mods replace these.  These are only displayed if they are 
 // replaced by dehacked.
 
-static char *copyright_banners[] =
+static char const *copyright_banners[] =
 {
     "===========================================================================\n"
     "ATTENTION:  This version of DOOM has been modified.  If you would like to\n"
@@ -906,7 +906,7 @@ void PrintDehackedBanners(void)
 
     for (i=0; i<arrlen(copyright_banners); ++i)
     {
-        char *deh_s;
+        char const *deh_s;
 
         deh_s = DEH_String(copyright_banners[i]);
 
@@ -927,8 +927,8 @@ void PrintDehackedBanners(void)
 
 static struct 
 {
-    char *description;
-    char *cmdline;
+    char const *description;
+    char const *cmdline;
     GameVersion_t version;
 } gameversions[] = {
     {"Doom 1.666",           "1.666",      exe_doom_1_666},
@@ -1085,7 +1085,7 @@ static void D_Endoom(void)
 	exit(0);
 }
 
-#if ORIGCODE
+#ifdef ORIGCODE
 // Load dehacked patches needed for certain IWADs.
 static void LoadIwadDeh(void)
 {
@@ -1165,7 +1165,7 @@ void D_DoomMain (void)
     int p;
     char file[256];
     char demolumpname[9];
-#if ORIGCODE
+#ifdef ORIGCODE
     int numiwadlumps;
 #endif
 
@@ -1377,7 +1377,7 @@ void D_DoomMain (void)
 
     DEH_printf("W_Init: Init WADfiles.\n");
     D_AddFile(iwadfile);
-#if ORIGCODE
+#ifdef ORIGCODE
     numiwadlumps = numlumps;
 #endif
 
@@ -1388,7 +1388,7 @@ void D_DoomMain (void)
     D_IdentifyVersion();
     InitGameVersion();
 
-#if ORIGCODE
+#ifdef ORIGCODE
     //!
     // @category mod
     //
@@ -1518,7 +1518,7 @@ void D_DoomMain (void)
     // Load DEHACKED lumps from WAD files - but only if we give the right
     // command line parameter.
 
-#if ORIGCODE
+#ifdef ORIGCODE
     //!
     // @category mod
     //

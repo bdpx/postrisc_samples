@@ -42,12 +42,12 @@
 // Location where all configuration data is stored - 
 // default.cfg, savegames, etc.
 
-char *configdir;
+char const *configdir;
 
 // Default filenames for configuration files.
 
-static char *default_main_config;
-static char *default_extra_config;
+static char const *default_main_config;
+static char const *default_extra_config;
 
 typedef enum 
 {
@@ -61,7 +61,7 @@ typedef enum
 typedef struct
 {
     // Name of the variable
-    char *name;
+    char const *name;
 
     // Pointer to the location in memory of the variable
     void *location;
@@ -1560,7 +1560,7 @@ static default_collection_t extra_defaults =
 
 // Search a collection for a variable
 
-static default_t *SearchCollection(default_collection_t *collection, char *name)
+static default_t *SearchCollection(default_collection_t *collection, char const *name)
 {
     int i;
 
@@ -1608,7 +1608,7 @@ static const int scantokey[128] =
 
 static void SaveDefaultCollection(default_collection_t *collection)
 {
-#if ORIGCODE
+#ifdef ORIGCODE
     default_t *defaults;
     int i, v;
     FILE *f;
@@ -1770,7 +1770,7 @@ static void SetVariable(default_t *def, char *value)
 
 static void LoadDefaultCollection(default_collection_t *collection)
 {
-#if ORIGCODE
+#ifdef ORIGCODE
     FILE *f;
     default_t *def;
     char defname[80];
@@ -1833,7 +1833,7 @@ static void LoadDefaultCollection(default_collection_t *collection)
 
 // Set the default filenames to use for configuration files.
 
-void M_SetConfigFilenames(char *main_config, char *extra_config)
+void M_SetConfigFilenames(char const *main_config, char const *extra_config)
 {
     default_main_config = main_config;
     default_extra_config = extra_config;
@@ -1934,7 +1934,7 @@ void M_LoadDefaults (void)
 
 // Get a configuration file variable by its name
 
-static default_t *GetDefaultForName(char *name)
+static default_t *GetDefaultForName(char const *name)
 {
     default_t *result;
 
@@ -1961,7 +1961,7 @@ static default_t *GetDefaultForName(char *name)
 // Bind a variable to a given configuration file variable, by name.
 //
 
-void M_BindVariable(char *name, void *location)
+void M_BindVariable(char const *name, void *location)
 {
     default_t *variable;
 
@@ -2056,7 +2056,7 @@ static char *GetDefaultConfigDir(void)
 // files are stored - default.cfg, chocolate-doom.cfg, savegames, etc.
 //
 
-void M_SetConfigDir(char *dir)
+void M_SetConfigDir(char const *dir)
 {
     // Use the directory that was passed, or find the default.
 
@@ -2084,10 +2084,10 @@ void M_SetConfigDir(char *dir)
 // Creates the directory as necessary.
 //
 
-char *M_GetSaveGameDir(char *iwadname)
+char *M_GetSaveGameDir(char const *iwadname)
 {
     char *savegamedir;
-#if ORIGCODE
+#ifdef ORIGCODE
     char *topdir;
 #endif
 
@@ -2100,7 +2100,7 @@ char *M_GetSaveGameDir(char *iwadname)
     }
     else
     {
-#if ORIGCODE
+#ifdef ORIGCODE
         // ~/.chocolate-doom/savegames
 
         topdir = M_StringJoin(configdir, "savegame", NULL);

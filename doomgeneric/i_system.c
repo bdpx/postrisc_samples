@@ -163,7 +163,7 @@ byte *I_ZoneBase (int *size)
     return zonemem;
 }
 
-void I_PrintBanner(char *msg)
+void I_PrintBanner(char const *msg)
 {
     int i;
     int spaces = 35 - (strlen(msg) / 2);
@@ -186,7 +186,7 @@ void I_PrintDivider(void)
     putchar('\n');
 }
 
-void I_PrintStartupBanner(char *gamedescription)
+void I_PrintStartupBanner(char const *gamedescription)
 {
     I_PrintDivider();
     I_PrintBanner(gamedescription);
@@ -213,7 +213,7 @@ boolean I_ConsoleStdout(void)
     // SDL "helpfully" always redirects stdout to a file.
     return 0;
 #else
-#if ORIGCODE
+#ifdef ORIGCODE
     return isatty(fileno(stdout));
 #else
 	return 0;
@@ -257,7 +257,7 @@ void I_Quit (void)
         entry = entry->next;
     }
 
-#if ORIGCODE
+#ifdef ORIGCODE
     SDL_Quit();
 
     exit(0);
@@ -356,7 +356,7 @@ static int ZenityErrorBox(char *message)
 
 static boolean already_quitting = false;
 
-void I_Error (char *error, ...)
+void I_Error (char const *error, ...)
 {
     char msgbuf[512];
     va_list argptr;
@@ -366,7 +366,7 @@ void I_Error (char *error, ...)
     if (already_quitting)
     {
         fprintf(stderr, "Warning: recursive call to I_Error detected.\n");
-#if ORIGCODE
+#ifdef ORIGCODE
         exit(-1);
 #endif
     }
@@ -461,7 +461,7 @@ void I_Error (char *error, ...)
 #endif
 
     // abort();
-#if ORIGCODE
+#ifdef ORIGCODE
     SDL_Quit();
 
     exit(-1);

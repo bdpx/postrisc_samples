@@ -111,7 +111,7 @@ void I_ReadScreen (byte* scr);
 
 void I_BeginRead (void);
 
-void I_SetWindowTitle(char *title);
+void I_SetWindowTitle(char const *title);
 
 void I_CheckIsScreensaver(void);
 void I_SetGrabMouseCallback(grabmouse_callback_t func);

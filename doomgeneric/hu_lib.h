@@ -133,9 +133,9 @@ void HUlib_addLineToSText(hu_stext_t* s);
 // ?
 void
 HUlib_addMessageToSText
-( hu_stext_t*	s,
-  char*		prefix,
-  char*		msg );
+( hu_stext_t *s,
+  char const *prefix,
+  char const *msg );
 
 // draws stext
 void HUlib_drawSText(hu_stext_t* s);

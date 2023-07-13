@@ -50,7 +50,7 @@ int snd_maxslicetime_ms = 28;
 
 // External command to invoke to play back music.
 
-char *snd_musiccmd = "";
+char const *snd_musiccmd = "";
 
 // Low-level sound and music modules we are using
 

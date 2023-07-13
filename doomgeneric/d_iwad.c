@@ -58,10 +58,10 @@ static const iwad_t iwads[] =
 #define MAX_IWAD_DIRS 128
 
 static boolean iwad_dirs_built = false;
-static char *iwad_dirs[MAX_IWAD_DIRS];
+static char const *iwad_dirs[MAX_IWAD_DIRS];
 static int num_iwad_dirs = 0;
 
-static void AddIWADDir(char *dir)
+static void AddIWADDir(char const *dir)
 {
     if (num_iwad_dirs < MAX_IWAD_DIRS)
     {
@@ -388,7 +388,7 @@ static void CheckDOSDefaults(void)
 // Returns true if the specified path is a path to a file
 // of the specified name.
 
-static boolean DirIsFile(char *path, char *filename)
+static boolean DirIsFile(char const *path, char const *filename)
 {
     size_t path_len;
     size_t filename_len;
@@ -405,7 +405,7 @@ static boolean DirIsFile(char *path, char *filename)
 // file, returning the full path to the IWAD if found, or NULL
 // if not found.
 
-static char *CheckDirectoryHasIWAD(char *dir, char *iwadname)
+static char const *CheckDirectoryHasIWAD(char const *dir, char const *iwadname)
 {
     char *filename; 
 
@@ -444,9 +444,9 @@ static char *CheckDirectoryHasIWAD(char *dir, char *iwadname)
 // Search a directory to try to find an IWAD
 // Returns the location of the IWAD if found, otherwise NULL.
 
-static char *SearchDirectoryForIWAD(char *dir, int mask, GameMission_t *mission)
+static char const *SearchDirectoryForIWAD(char const *dir, int mask, GameMission_t *mission)
 {
-    char *filename;
+    char const *filename;
     size_t i;
 
     for (i=0; i<arrlen(iwads); ++i) 
@@ -472,7 +472,7 @@ static char *SearchDirectoryForIWAD(char *dir, int mask, GameMission_t *mission)
 // When given an IWAD with the '-iwad' parameter,
 // attempt to identify it by its name.
 
-static GameMission_t IdentifyIWADByName(char *name, int mask)
+static GameMission_t IdentifyIWADByName(char const *name, int mask)
 {
     size_t i;
     GameMission_t mission;
@@ -508,7 +508,7 @@ static GameMission_t IdentifyIWADByName(char *name, int mask)
     return mission;
 }
 
-#if ORIGCODE
+#ifdef ORIGCODE
 //
 // Add directories from the list in the DOOMWADPATH environment variable.
 //
@@ -566,7 +566,7 @@ static void AddDoomWadPath(void)
 
 static void BuildIWADDirList(void)
 {
-#if ORIGCODE
+#ifdef ORIGCODE
     char *doomwaddir;
 
     if (iwad_dirs_built)
@@ -625,7 +625,7 @@ static void BuildIWADDirList(void)
 // Searches WAD search paths for an WAD with a specific filename.
 // 
 
-char *D_FindWADByName(char *name)
+char const *D_FindWADByName(char const *name)
 {
     char *path;
     int i;
@@ -676,9 +676,9 @@ char *D_FindWADByName(char *name)
 // if not found.
 //
 
-char *D_TryFindWADByName(char *filename)
+char const *D_TryFindWADByName(char const *filename)
 {
-    char *result;
+    char const *result;
 
     result = D_FindWADByName(filename);
 
@@ -699,9 +699,9 @@ char *D_TryFindWADByName(char *filename)
 // should be executed (notably loading PWADs).
 //
 
-char *D_FindIWAD(int mask, GameMission_t *mission)
+char const *D_FindIWAD(int mask, GameMission_t *mission)
 {
-    char *result;
+    char const *result;
     char *iwadfile;
     int iwadparm;
     int i;
@@ -756,8 +756,8 @@ const iwad_t **D_FindAllIWADs(int mask)
 {
     const iwad_t **result;
     int result_len;
-    char *filename;
-    int i;
+    char const *filename;
+    size_t i;
 
     result = malloc(sizeof(iwad_t *) * (arrlen(iwads) + 1));
     result_len = 0;
@@ -791,7 +791,7 @@ const iwad_t **D_FindAllIWADs(int mask)
 // Get the IWAD name used for savegames.
 //
 
-char *D_SaveGameIWADName(GameMission_t gamemission)
+char const *D_SaveGameIWADName(GameMission_t gamemission)
 {
     size_t i;
 
@@ -815,9 +815,9 @@ char *D_SaveGameIWADName(GameMission_t gamemission)
     return "unknown.wad";
 }
 
-char *D_SuggestIWADName(GameMission_t mission, GameMode_t mode)
+char const *D_SuggestIWADName(GameMission_t mission, GameMode_t mode)
 {
-    int i;
+    size_t i;
 
     for (i = 0; i < arrlen(iwads); ++i)
     {
@@ -830,9 +830,9 @@ char *D_SuggestIWADName(GameMission_t mission, GameMode_t mode)
     return "unknown.wad";
 }
 
-char *D_SuggestGameName(GameMission_t mission, GameMode_t mode)
+char const *D_SuggestGameName(GameMission_t mission, GameMode_t mode)
 {
-    int i;
+    size_t i;
 
     for (i = 0; i < arrlen(iwads); ++i)
     {

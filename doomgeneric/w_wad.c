@@ -136,7 +136,7 @@ static void ExtendLumpInfo(int newnumlumps)
 // Other files are single lumps with the base filename
 //  for the lump name.
 
-wad_file_t *W_AddFile (char *filename)
+wad_file_t *W_AddFile (char const *filename)
 {
     wadinfo_t header;
     lumpinfo_t *lump_p;
@@ -253,7 +253,7 @@ int W_NumLumps (void)
 // Returns -1 if name not found.
 //
 
-int W_CheckNumForName (char* name)
+int W_CheckNumForName (char const *name)
 {
     lumpinfo_t *lump_p;
     int i;
@@ -303,7 +303,7 @@ int W_CheckNumForName (char* name)
 // W_GetNumForName
 // Calls W_CheckNumForName, but bombs out if not found.
 //
-int W_GetNumForName (char* name)
+int W_GetNumForName (char const *name)
 {
     int	i;
 
@@ -426,7 +426,7 @@ void *W_CacheLumpNum(int lumpnum, int tag)
 //
 // W_CacheLumpName
 //
-void *W_CacheLumpName(char *name, int tag)
+void *W_CacheLumpName(char const *name, int tag)
 {
     return W_CacheLumpNum(W_GetNumForName(name), tag);
 }
@@ -462,7 +462,7 @@ void W_ReleaseLumpNum(int lumpnum)
     }
 }
 
-void W_ReleaseLumpName(char *name)
+void W_ReleaseLumpName(char const *name)
 {
     W_ReleaseLumpNum(W_GetNumForName(name));
 }
@@ -505,7 +505,7 @@ void W_Profile (void)
 	info[i][profilecount] = ch;
     }
     profilecount++;
-#if ORIGCODE
+#ifdef ORIGCODE
     f = fopen ("waddump.txt","w");
     name[8] = 0;
 
@@ -575,7 +575,7 @@ void W_GenerateHashTable(void)
 static const struct
 {
     GameMission_t mission;
-    char *lumpname;
+    char lumpname[8];
 } unique_lumps[] = {
     { doom,    "POSSA1" },
     { heretic, "IMPXA1" },
@@ -585,7 +585,7 @@ static const struct
 
 void W_CheckCorrectIWAD(GameMission_t mission)
 {
-    int i;
+    size_t i;
     int lumpnum;
 
     for (i = 0; i < arrlen(unique_lumps); ++i)

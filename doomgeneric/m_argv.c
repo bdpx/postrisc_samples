@@ -40,7 +40,7 @@ char**		myargv;
 // or 0 if not present
 //
 
-int M_CheckParmWithArgs(char *check, int num_args)
+int M_CheckParmWithArgs(char const *check, int num_args)
 {
     int i;
 
@@ -60,12 +60,12 @@ int M_CheckParmWithArgs(char *check, int num_args)
 // line arguments, false if not.
 //
 
-boolean M_ParmExists(char *check)
+boolean M_ParmExists(char const *check)
 {
     return M_CheckParm(check) != 0;
 }
 
-int M_CheckParm(char *check)
+int M_CheckParm(char const *check)
 {
     return M_CheckParmWithArgs(check, 0);
 }
@@ -74,7 +74,7 @@ int M_CheckParm(char *check)
 
 static void LoadResponseFile(int argv_index)
 {
-#if ORIGCODE
+#ifdef ORIGCODE
     FILE *handle;
     int size;
     char *infile;
@@ -92,7 +92,7 @@ static void LoadResponseFile(int argv_index)
     if (handle == NULL)
     {
         printf ("\nNo such response file!");
-#if ORIGCODE
+#ifdef ORIGCODE
         exit(1);
 #endif
     }

@@ -86,7 +86,7 @@ int			quickSaveSlot;
  // 1 = message to be printed
 int			messageToPrint;
 // ...and here is the message string!
-char*			messageString;
+char const*			messageString;
 
 // message x & y
 int			messx;
@@ -165,7 +165,7 @@ short		whichSkull;		// which skull to draw
 
 // graphic name of skulls
 // warning: initializer-string for array of chars is too long
-char    *skullName[2] = {"M_SKULL1","M_SKULL2"};
+char const    *skullName[2] = {"M_SKULL1","M_SKULL2"};
 
 // current menudef
 menu_t*	currentMenu;                          
@@ -215,10 +215,10 @@ void M_SetupNextMenu(menu_t *menudef);
 void M_DrawThermo(int x,int y,int thermWidth,int thermDot);
 void M_DrawEmptyCell(menu_t *menu,int item);
 void M_DrawSelCell(menu_t *menu,int item);
-void M_WriteText(int x, int y, char *string);
+void M_WriteText(int x, int y, char const *string);
 int  M_StringWidth(char *string);
-int  M_StringHeight(char *string);
-void M_StartMessage(char *string, void (*routine)(int key), boolean input);
+int  M_StringHeight(char const *string);
+void M_StartMessage(char const *string, void (*routine)(int key), boolean input);
 void M_StopMessage(void);
 void M_ClearMenus (void);
 
@@ -742,7 +742,7 @@ void M_QuickLoad(void)
 //
 void M_DrawReadThis1(void)
 {
-    char *lumpname = "CREDIT";
+    char const *lumpname = "CREDIT";
     int skullx = 330, skully = 175;
 
     inhelpscreens = true;
@@ -981,8 +981,8 @@ void M_Episode(int choice)
 //
 // M_Options
 //
-static char *detailNames[2] = {"M_GDHIGH","M_GDLOW"};
-static char *msgNames[2] = {"M_MSGOFF","M_MSGON"};
+static char const *detailNames[2] = {"M_GDHIGH","M_GDLOW"};
+static char const *msgNames[2] = {"M_MSGOFF","M_MSGON"};
 
 void M_DrawOptions(void)
 {
@@ -1144,9 +1144,9 @@ void M_QuitResponse(int key)
 }
 
 
-static char *M_SelectEndMessage(void)
+static char const *M_SelectEndMessage(void)
 {
-    char **endmsg;
+    char const **endmsg;
 
     if (logical_gamemission == doom)
     {
@@ -1287,7 +1287,7 @@ M_DrawSelCell
 
 void
 M_StartMessage
-( char*		string,
+( char const *		string,
   void (*routine)(int key),
   boolean	input )
 {
@@ -1335,7 +1335,7 @@ int M_StringWidth(char* string)
 //
 //      Find string height from hu_font chars
 //
-int M_StringHeight(char* string)
+int M_StringHeight(char const *string)
 {
     size_t             i;
     int             h;
@@ -1357,10 +1357,10 @@ void
 M_WriteText
 ( int		x,
   int		y,
-  char*		string)
+  char const *	string)
 {
     int		w;
-    char*	ch;
+    char const *ch;
     int		c;
     int		cx;
     int		cy;

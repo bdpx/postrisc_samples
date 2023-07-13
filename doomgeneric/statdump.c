@@ -41,7 +41,7 @@ static const int doom2_par_times[] =
     30, 90, 120, 120, 90, 150, 120, 120, 270,
 };
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Player colors. */
 static const char *player_colors[] =
@@ -57,11 +57,11 @@ static const char *player_colors[] =
 static wbstartstruct_t captured_stats[MAX_CAPTURES];
 static int num_captured_stats = 0;
 
-#if ORIGCODE
+#ifdef ORIGCODE
 static GameMission_t discovered_gamemission = none;
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Try to work out whether this is a Doom 1 or Doom 2 game, by looking
  * at the episode and map, and the par times.  This is used to decide
@@ -123,7 +123,7 @@ static void DiscoverGamemode(wbstartstruct_t *stats, int num_stats)
 
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Returns the number of players active in the given stats buffer. */
 
@@ -145,7 +145,7 @@ static int GetNumPlayers(wbstartstruct_t *stats)
 
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 static void PrintBanner(FILE *stream)
 {
@@ -173,7 +173,7 @@ static void PrintPercentage(FILE *stream, int amount, int total)
 
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Display statistics for a single player. */
 
@@ -206,7 +206,7 @@ static void PrintPlayerStats(FILE *stream, wbstartstruct_t *stats,
 
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Frags table for multiplayer games. */
 
@@ -265,7 +265,7 @@ static void PrintFragsTable(FILE *stream, wbstartstruct_t *stats)
 
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Displays the level name: MAPxy or ExMy, depending on game mode. */
 
@@ -294,7 +294,7 @@ static void PrintLevelName(FILE *stream, int episode, int level)
 
 #endif
 
-#if ORIGCODE
+#ifdef ORIGCODE
 
 /* Print details of a statistics buffer to the given file. */
 
@@ -342,7 +342,7 @@ void StatCopy(wbstartstruct_t *stats)
 
 void StatDump(void)
 {
-#if ORIGCODE
+#ifdef ORIGCODE
     FILE *dumpfile;
     int i;
 

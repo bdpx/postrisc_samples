@@ -56,7 +56,7 @@ extern  boolean	devparm;	// DEBUG: launched with -devparm
 extern GameMode_t	gamemode;
 extern GameMission_t	gamemission;
 extern GameVersion_t    gameversion;
-extern char            *gamedescription;
+extern char const  *gamedescription;
 
 // If true, we're using one of the mangled BFG edition IWADs.
 extern boolean bfgedition;
@@ -246,7 +246,7 @@ extern  wbstartstruct_t		wminfo;
 //
 
 // File handling stuff.
-extern  char *          savegamedir;
+extern  char const *    savegamedir;
 extern	char		basedefault[1024];
 
 // if true, load all graphics at level load
